@@ -12,7 +12,8 @@ dist/
 .env.*.local
 
 # Assets folder (add this line)
-src/lib/assets/
+src/lib/assets/ddface.png
+src/lib/assets/favicon.svg
 
 # Other common ignores
 .DS_Store

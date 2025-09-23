@@ -19,7 +19,7 @@
 	<!-- Left column: Profile image, name and role -->
 	<div class="flex items-center gap-4">
 		<!-- Profile image -->
-		<div
+		<!-- <div
 			class="profile-image-container ml-2 h-20 w-20 overflow-hidden rounded-full border-2 border-gray-300"
 		>
 			<img
@@ -28,10 +28,10 @@
 				class="profile-image h-full w-full -translate-x-[10px]
                                                   translate-y-[10px] scale-150 object-cover"
 			/>
-		</div>
+		</div> -->
 
 		<!-- Name and role -->
-		<div class="name-role-container">
+		<div class="name-role-container ml-6">
 			<h1 class="devname text-xl font-bold">Damon Dantin</h1>
 			<p class="rolename text-gray-600">Software Developer</p>
 		</div>
