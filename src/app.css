@@ -1,0 +1,21 @@
+@import 'tailwindcss';
+/* font-family: ui-sans-serif, system-ui, -apple-system, 
+             BlinkMacSystemFont, "Segoe UI", Roboto, 
+             "Helvetica Neue", Arial, "Noto Sans", 
+             sans-serif; */
+
+.portfolio-heading-container{
+    font-family:'Times New Roman', Times, serif;
+}
+
+.devname {
+
+}
+
+.rolename {
+
+}
+
+.threecs {
+    font-family:'Courier New', Courier, monospace;
+}

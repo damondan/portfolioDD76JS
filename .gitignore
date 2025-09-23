@@ -1,0 +1,19 @@
+# Dependencies
+node_modules/
+
+# Build outputs
+.svelte-kit/
+build/
+dist/
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# Assets folder (add this line)
+src/lib/assets/
+
+# Other common ignores
+.DS_Store
+Thumbs.db

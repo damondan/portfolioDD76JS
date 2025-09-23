@@ -1,0 +1,9 @@
+NOTES
+tailwindcss
+The tailwindcss/typography in app.css is not working. Delete it.
+Make sure tailwind.config.js is present and add the dependencies.
+
+(home) in routes purpose
+Organization, for example if you want to create an Admin section, you could set a (admin)
+
+Github Actions
