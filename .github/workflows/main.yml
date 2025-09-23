@@ -48,9 +48,6 @@ jobs:
       
     - name: Build SvelteKit app
       run: pnpm run build
-      
-    - name: Check build output
-      run: pnpm run preview --if-present
 
   deploy:
     needs: test
