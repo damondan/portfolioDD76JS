@@ -25,13 +25,26 @@ jobs:
     - name: Setup pnpm
       uses: pnpm/action-setup@v4
       with:
-        version: 10
+        version: latest
         
     - name: Install dependencies
       run: pnpm install --frozen-lockfile
       
+    - name: Run linting (if configured)
+      run: pnpm run lint
+      continue-on-error: true
+      
     - name: Build SvelteKit app
       run: pnpm run build
+      
+    - name: Debug - Verify build contents
+      run: |
+        echo "Build directory contents:"
+        ls -la build/
+        echo "First 20 lines of build/index.html:"
+        head -20 build/index.html
+        echo "Looking for your app content:"
+        grep -i "portfolio\|welcome" build/index.html || echo "App content not found"
       
     - name: Setup Pages
       uses: actions/configure-pages@v4
