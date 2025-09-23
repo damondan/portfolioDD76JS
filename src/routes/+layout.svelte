@@ -1,5 +1,5 @@
 <script>
-	import '../../app.css';
+	import '../app.css';
 	//import profileImage from '$lib/assets/ddface.png';
 
 	let { children } = $props();
