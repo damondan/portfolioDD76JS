@@ -1,5 +1,5 @@
 <script>
-	// import docSearchImage from '$lib/assets/pdfdocsearchTs.png';
+	 import docSearchImage from '$lib/assets/pdfdocsearchTs.png';
 	import { asset } from '$app/paths';
 
 	function handleDocSearchLink() {
@@ -19,7 +19,7 @@
 			onclick={handleDocSearchLink}
 		>
 			<img
-				src={asset('/pdfdocsearchTs.png')}
+				src={asset(docSearchImage)}
 				alt="Description"
 				class="h-full w-full
             object-cover"
