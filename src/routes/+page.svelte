@@ -1,6 +1,7 @@
 <script>
-	import docSearchImage from '$lib/assets/pdfdocsearchTs.png';
-
+	// import docSearchImage from '$lib/assets/pdfdocsearchTs.png';
+	import docSearchImage from 'static/pdfdocsearchTs.png';
+	
 	function handleDocSearchLink() {
 		window.open('https://pdfdocsearch-sv-ts-production.up.railway.app/', '_blank');
 	}
