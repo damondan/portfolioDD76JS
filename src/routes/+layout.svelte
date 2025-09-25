@@ -1,5 +1,6 @@
 <script>
 	import '../app.css';
+	import { resolve } from '$app/paths';
 	//import profileImage from '$lib/assets/ddface.png';
 
 	let { children } = $props();
@@ -47,14 +48,14 @@
 
 <div class="flex w-full justify-center">
 	<a
-		href="/"
+		href={resolve("/")}
 		onclick={() => openTab('docsearch')}
 		class="ml-6 {activeTab === 'docsearch' ? 'active text-green' : ''}"
 	>
 		SvelteKit-PdfDocSearch
 	</a>
 	<a
-		href="/nextproject"
+		href={resolve("/nextproject")}
 		onclick={() => openTab('nextproject')}
 		class="ml-6 {activeTab === 'nextproject' ? 'active text-green' : ''}"
 	>
