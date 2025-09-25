@@ -7,5 +7,5 @@ Make sure tailwind.config.js is present and add the dependencies.
 Organization, for example if you want to create an Admin section, you could set a (admin)
 
 Github Actions
-[ Stopped at Updated main.yml Without Linting in Claude Githubpages deploy ]
-Changed the main.yml to take out linting. Failed. Check Github deploy.
+In github settings pages, I needed to change the deploy to branch, to Github Actions.
+The layout.js file needed to be added for prerendering, since Github pages needs a static site.
