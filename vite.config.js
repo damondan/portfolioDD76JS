@@ -2,8 +2,11 @@ import tailwindcss from '@tailwindcss/vite';
 import { sveltekit } from '@sveltejs/kit/vite';
 import { defineConfig } from 'vite';
 
+const isProduction = process.env.NODE_ENV === 'production';
+
 export default defineConfig({
 	plugins: [tailwindcss(), sveltekit()],
+	base: isProduction ? '/portfolioDD76JS/' : '/',
 	assetsInclude: ['**/*.png', '**/*.jpg', '**/*.jpeg', '**/*.gif', '**/*.svg'],
 	test: {
 		expect: { requireAssertions: true },

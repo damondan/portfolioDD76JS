@@ -1,53 +1,55 @@
-name: Deploy SvelteKit to GitHub Pages
+name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: [ main ]
-
-permissions:
-  contents: read
-  pages: write
-  id-token: write
+    branches: 'main'
 
 jobs:
-  build:
+  build_site:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      
-      - uses: actions/setup-node@v4
-        with:
-          node-version: '22'
-          
-      - uses: pnpm/action-setup@v3
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v3
         with:
           version: 10
-          
-      - run: pnpm install --frozen-lockfile
-      
-      - run: pnpm build
-      
-      - name: Debug - Verify build contents
-        run: |
-          echo "Build directory contents:"
-          ls -la build/
-          echo "First 20 lines of build/index.html:"
-          head -20 build/index.html
-          echo "Checking for app content:"
-          grep -i "welcome\|portfolio" build/index.html || echo "No app content found"
-      
-      - uses: actions/configure-pages@v4
-      
-      - uses: actions/upload-pages-artifact@v3
+
+      - name: Install Node.js
+        uses: actions/setup-node@v4
         with:
-          path: 'build'
+          node-version: 22
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm i
+
+      - name: build
+        env:
+          BASE_PATH: '/${{ github.event.repository.name }}'
+        run: |
+          pnpm run build
+
+      - name: Upload Artifacts
+        uses: actions/upload-pages-artifact@v3
+        with:
+          # this should match the `pages` option in your adapter-static options
+          path: 'build/'
 
   deploy:
-    needs: build
+    needs: build_site
     runs-on: ubuntu-latest
+
+    permissions:
+      pages: write
+      id-token: write
+
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
+
     steps:
-      - uses: actions/deploy-pages@v4
+      - name: Deploy
         id: deployment
+        uses: actions/deploy-pages@v4
