@@ -8,9 +8,20 @@ const config = {
     adapter: adapter({
       pages: 'build',
       assets: 'build',
-      fallback: null,
-      precompress: false
-    })
+      fallback: 'index.html',  // SPA fallback for dynamic routes
+      precompress: false,
+      strict: false            // Allows mixed prerendered and dynamic routes
+    }),
+    prerender: {
+      handleHttpError: 'warn',   // Don't fail on HTTP errors
+      handleMissingId: 'warn',   // Don't fail on missing IDs
+      entries: [                 // Specify which routes to prerender
+        '/',
+        '/about',
+        '/projects',
+        // Add other static routes here
+      ]
+    }
   }
 };
 

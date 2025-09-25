@@ -8,3 +8,4 @@ Organization, for example if you want to create an Admin section, you could set 
 
 Github Actions
 [ Stopped at Updated main.yml Without Linting in Claude Githubpages deploy ]
+Changed the main.yml to take out linting. Failed. Check Github deploy.
