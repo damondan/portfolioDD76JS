@@ -15,47 +15,33 @@
 		activeTab = tabName;
 	}
 </script>
-
-<div class="portfolio-heading-container grid grid-cols-3 items-start gap-4 py-4">
-	<!-- Left column: Profile image, name and role -->
-	<div class="flex items-center gap-4">
-		<!-- Profile image -->
-		<!-- <div
-			class="profile-image-container ml-2 h-20 w-20 overflow-hidden rounded-full border-2 border-gray-300"
-		>
-			<img
-				src={profileImage}
-				alt="Profile"
-				class="profile-image h-full w-full -translate-x-[10px]
-                                                  translate-y-[10px] scale-150 object-cover"
-			/>
-		</div> -->
-
-		<!-- Name and role -->
-		<div class="name-role-container ml-6">
-			<h1 class="devname text-xl font-bold">Damon Dantin</h1>
-			<p class="rolename text-gray-600">Software Developer</p>
-		</div>
-	</div>
-
-	<!-- Center column: PROJECTS and tapered line -->
-	<div class="mt-6 flex flex-col items-center">
-		<h1 class="text-2xl tracking-[2rem]">PROJECTS</h1>
-		<!-- Tapered line below PROJECTS -->
-		<div class="tapered-line mt-3"></div>
-	</div>
+<div class="portfolio-heading-container flex flex-col gap-4 py-4">
+    <!-- Name and role on same line -->
+    <div class="name-role-container ml-6 flex justify-center gap-2">
+        <h1 class="devname text-xl font-bold">Damon Dantin</h1>
+        <span class="text-gray-400">|</span>
+        <p class="rolename text-gray-600">Software Developer</p>
+    </div>
+    
+    <!-- PROJECTS section below -->
+    <div class="flex flex-col items-center">
+        <h1 class="text-xl md:text-2xl tracking-[0.25rem] sm:tracking-[0.5rem] 
+			md:tracking-[1rem] lg:tracking-[2rem]">PROJECTS</h1>
+        <!-- Tapered line below PROJECTS -->
+        <div class="tapered-line mt-3"></div>
+    </div>
 </div>
 
 <div class="flex w-full justify-center">
 	<a
-		href={resolve("/")}
+		href={resolve('/')}
 		onclick={() => openTab('docsearch')}
 		class="ml-6 {activeTab === 'docsearch' ? 'active text-green' : ''}"
 	>
 		SvelteKit-PdfDocSearch
 	</a>
 	<a
-		href={resolve("/nextproject")}
+		href={resolve('/nextproject')}
 		onclick={() => openTab('nextproject')}
 		class="ml-6 {activeTab === 'nextproject' ? 'active text-green' : ''}"
 	>
@@ -88,3 +74,15 @@
 		color: darkgreen;
 	}
 </style>
+
+<!-- Profile image -->
+<!-- <div
+			class="profile-image-container ml-2 h-20 w-20 overflow-hidden rounded-full border-2 border-gray-300"
+		>
+			<img
+				src={profileImage}
+				alt="Profile"
+				class="profile-image h-full w-full -translate-x-[10px]
+                                                  translate-y-[10px] scale-150 object-cover"
+			/>
+		</div> -->
