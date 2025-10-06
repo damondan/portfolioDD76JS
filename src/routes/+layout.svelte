@@ -15,45 +15,57 @@
 		activeTab = tabName;
 	}
 </script>
-<div class="portfolio-heading-container flex flex-col gap-4 py-4">
-    <!-- Name and role on same line -->
-    <div class="name-role-container ml-6 flex justify-center gap-2">
-        <h1 class="devname text-xl font-bold">Damon Dantin</h1>
-        <span class="text-gray-400">|</span>
-        <p class="rolename text-gray-600">Software Developer</p>
+<div class="portfolio-heading-container flex flex-col gap-4 py-4 px-4 sm:px-6 lg:px-8">
+    <!-- Name and role responsive layout -->
+    <div class="name-role-container flex flex-col sm:flex-row justify-center items-center gap-1 sm:gap-2">
+        <h1 class="devname text-3xl font-bold text-center sm:text-left">
+            Damon Dantin
+        </h1>
+        <span class="text-gray-400 hidden sm:inline">|</span>
+        <p class="rolename text-gray-600 text-center sm:text-left lg:text-2xl">
+            Software Developer
+        </p>
     </div>
     
-    <!-- PROJECTS section below -->
-    <div class="flex flex-col items-center">
-        <h1 class="text-xl md:text-2xl tracking-[0.25rem] sm:tracking-[0.5rem] 
-			md:tracking-[1rem] lg:tracking-[2rem]">PROJECTS</h1>
-        <!-- Tapered line below PROJECTS -->
-        <div class="tapered-line mt-3"></div>
+    <!-- PROJECTS section responsive -->
+    <div class="flex flex-col items-center mt-2 sm:mt-4">
+        <h1 class="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl 
+                   tracking-[0.15rem] sm:tracking-[0.35rem] md:tracking-[0.7rem] 
+                   lg:tracking-[1.3rem] xl:tracking-[2rem] text-center font-medium">
+            PROJECTS
+        </h1>
+        <!-- Responsive tapered line -->
+        <div class="tapered-line mt-2 sm:mt-3"></div>
     </div>
 </div>
 
-<div class="flex w-full justify-center">
-	<a
-		href={resolve('/')}
-		onclick={() => openTab('docsearch')}
-		class="ml-6 {activeTab === 'docsearch' ? 'active text-green' : ''}"
-	>
-		SvelteKit-PdfDocSearch
-	</a>
-	<a
-		href={resolve('/nextproject')}
-		onclick={() => openTab('nextproject')}
-		class="ml-6 {activeTab === 'nextproject' ? 'active text-green' : ''}"
-	>
-		Next Project
-	</a>
+<div class="flex w-full justify-center px-4 sm:px-6">
+    <div class="flex flex-col sm:flex-row gap-2 sm:gap-6 items-center">
+        <a
+            href={resolve('/')}
+            onclick={() => openTab('docsearch')}
+            class="text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl px-3 py-1 rounded transition-colors 
+                   {activeTab === 'docsearch' ? 'active text-green font-semibold' : 'hover:text-gray-600'}"
+        >
+            SvelteKit-PdfDocSearch
+        </a>
+        <a
+            href={resolve('/nextproject')}
+            onclick={() => openTab('nextproject')}
+            class="text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl px-3 py-1 rounded transition-colors 
+                   {activeTab === 'nextproject' ? 'active text-green font-semibold' : 'hover:text-gray-600'}"
+        >
+            Next Project
+        </a>
+    </div>
 </div>
 
 {@render children()}
 
 <style>
 	.tapered-line {
-		width: 850px; /* Fixed width instead of percentage for better control in grid */
+		/* Responsive width using CSS custom properties and Tailwind breakpoints */
+		width: min(90vw, 300px); /* Mobile: 90% viewport width, max 300px */
 		height: 2px;
 		background: linear-gradient(
 			to right,
@@ -63,6 +75,25 @@
 			transparent 100%
 		);
 		opacity: 0.7;
+	}
+
+	/* Responsive tapered line widths */
+	@media (min-width: 640px) {
+		.tapered-line {
+			width: min(80vw, 500px); /* Tablet: 80% viewport width, max 500px */
+		}
+	}
+
+	@media (min-width: 768px) {
+		.tapered-line {
+			width: min(70vw, 650px); /* Small desktop: 70% viewport width, max 650px */
+		}
+	}
+
+	@media (min-width: 1024px) {
+		.tapered-line {
+			width: min(60vw, 850px); /* Large desktop: 60% viewport width, max 850px */
+		}
 	}
 
 	.active {
