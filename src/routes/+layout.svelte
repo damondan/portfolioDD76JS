@@ -40,11 +40,11 @@
 </div>
 
 <div class="flex w-full justify-center px-4 sm:px-6">
-    <div class="flex flex-col sm:flex-row gap-2 sm:gap-6 items-center">
+    <div class="pb-4 flex flex-col sm:flex-row gap-2 sm:gap-6 items-center">
         <a
             href={resolve('/')}
             onclick={() => openTab('docsearch')}
-            class="text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl px-3 py-1 rounded transition-colors 
+            class="border border-black text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl px-3 py-1 rounded transition-colors 
                    {activeTab === 'docsearch' ? 'active text-green font-semibold' : 'hover:text-gray-600'}"
         >
             SvelteKit-PdfDocSearch
@@ -52,7 +52,7 @@
         <a
             href={resolve('/nextproject')}
             onclick={() => openTab('nextproject')}
-            class="text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl px-3 py-1 rounded transition-colors 
+            class="border border-black text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl px-3 py-1 rounded transition-colors 
                    {activeTab === 'nextproject' ? 'active text-green font-semibold' : 'hover:text-gray-600'}"
         >
             Next Project
