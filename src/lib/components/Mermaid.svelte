@@ -125,6 +125,10 @@
                 const bbox = svgElement.getBBox();
                 const containerRect = panZoomContainer.getBoundingClientRect();
                 
+                console.log('Fit button clicked:');
+                console.log('SVG bbox:', { width: bbox.width, height: bbox.height });
+                console.log('Container rect:', { width: containerRect.width, height: containerRect.height });
+                
                 // Add more padding on mobile for better touch interaction
                 const padding = window.innerWidth < 640 ? 60 : 40;
                 const scaleX = (containerRect.width - padding) / bbox.width;
@@ -134,10 +138,18 @@
                 const maxScale = window.innerWidth < 640 ? 1.2 : 1;
                 scale = Math.min(scaleX, scaleY, maxScale);
                 
+                console.log('Calculated scale:', scale);
+                
                 translateX = (containerRect.width - bbox.width * scale) / 2;
                 translateY = (containerRect.height - bbox.height * scale) / 2;
+                
+                console.log('New position:', { translateX, translateY });
                 updateTransform();
+            } else {
+                console.log('No SVG element found');
             }
+        } else {
+            console.log('Missing container elements');
         }
     }
 
@@ -222,6 +234,10 @@
     
     // Touch event handlers
     function handleTouchStart(event: TouchEvent) {
+        // Don't prevent default on buttons and other interactive elements
+        if (event.target && (event.target as Element).tagName === 'BUTTON') {
+            return;
+        }
         event.preventDefault();
         touches = Array.from(event.touches);
         
@@ -252,6 +268,10 @@
     }
     
     function handleTouchMove(event: TouchEvent) {
+        // Don't prevent default on buttons and other interactive elements
+        if (event.target && (event.target as Element).tagName === 'BUTTON') {
+            return;
+        }
         event.preventDefault();
         touches = Array.from(event.touches);
         
@@ -293,6 +313,10 @@
     }
     
     function handleTouchEnd(event: TouchEvent) {
+        // Don't prevent default on buttons and other interactive elements
+        if (event.target && (event.target as Element).tagName === 'BUTTON') {
+            return;
+        }
         event.preventDefault();
         touches = Array.from(event.touches);
         

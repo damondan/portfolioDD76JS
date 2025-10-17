@@ -20,6 +20,7 @@
 
 <div class="docsearch-container mt-1 flex h-full w-full flex-col items-center gap-4 px-4 sm:px-6 lg:px-8">
 	<!-- Responsive clickable image with info overlay -->
+	<!-- svelte-ignore a11y-no-static-element-interactions -->
 	<div class="docsearch-buttonlink w-48 sm:w-64 md:w-80 lg:w-96 xl:w-[30rem] justify-center border-4 sm:border-6
                 border-green-300 hover:border-green-600 transition-colors duration-200 relative group"
 		 onmouseenter={handleMouseEnter}
