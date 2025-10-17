@@ -18,6 +18,14 @@
     let isDragging = false;
     let lastMouseX = 0;
     let lastMouseY = 0;
+    
+    // Touch state
+    let touches: Touch[] = [];
+    let lastTouchDistance = 0;
+    let lastTouchCenterX = 0;
+    let lastTouchCenterY = 0;
+    let isTouchPanning = false;
+    let isTouchZooming = false;
 
     onMount(async () => {
         try {
@@ -117,9 +125,14 @@
                 const bbox = svgElement.getBBox();
                 const containerRect = panZoomContainer.getBoundingClientRect();
                 
-                const scaleX = (containerRect.width - 40) / bbox.width;
-                const scaleY = (containerRect.height - 40) / bbox.height;
-                scale = Math.min(scaleX, scaleY, 1); // Don't scale up beyond 100%
+                // Add more padding on mobile for better touch interaction
+                const padding = window.innerWidth < 640 ? 60 : 40;
+                const scaleX = (containerRect.width - padding) / bbox.width;
+                const scaleY = (containerRect.height - padding) / bbox.height;
+                
+                // On mobile, allow slightly more scaling for better visibility
+                const maxScale = window.innerWidth < 640 ? 1.2 : 1;
+                scale = Math.min(scaleX, scaleY, maxScale);
                 
                 translateX = (containerRect.width - bbox.width * scale) / 2;
                 translateY = (containerRect.height - bbox.height * scale) / 2;
@@ -192,6 +205,113 @@
             updateTransform();
         }
     }
+    
+    // Touch helper functions
+    function getTouchDistance(touch1: Touch, touch2: Touch): number {
+        const dx = touch1.clientX - touch2.clientX;
+        const dy = touch1.clientY - touch2.clientY;
+        return Math.sqrt(dx * dx + dy * dy);
+    }
+    
+    function getTouchCenter(touch1: Touch, touch2: Touch): { x: number, y: number } {
+        return {
+            x: (touch1.clientX + touch2.clientX) / 2,
+            y: (touch1.clientY + touch2.clientY) / 2
+        };
+    }
+    
+    // Touch event handlers
+    function handleTouchStart(event: TouchEvent) {
+        event.preventDefault();
+        touches = Array.from(event.touches);
+        
+        if (touches.length === 1) {
+            // Single touch - start panning
+            isTouchPanning = true;
+            isTouchZooming = false;
+            lastMouseX = touches[0].clientX;
+            lastMouseY = touches[0].clientY;
+            
+            if (panZoomContainer) {
+                panZoomContainer.style.cursor = "grabbing";
+            }
+        } else if (touches.length === 2) {
+            // Two touches - start zooming
+            isTouchPanning = false;
+            isTouchZooming = true;
+            
+            lastTouchDistance = getTouchDistance(touches[0], touches[1]);
+            const center = getTouchCenter(touches[0], touches[1]);
+            const rect = panZoomContainer?.getBoundingClientRect();
+            
+            if (rect) {
+                lastTouchCenterX = center.x - rect.left;
+                lastTouchCenterY = center.y - rect.top;
+            }
+        }
+    }
+    
+    function handleTouchMove(event: TouchEvent) {
+        event.preventDefault();
+        touches = Array.from(event.touches);
+        
+        if (touches.length === 1 && isTouchPanning) {
+            // Single touch panning
+            const deltaX = touches[0].clientX - lastMouseX;
+            const deltaY = touches[0].clientY - lastMouseY;
+            
+            translateX += deltaX;
+            translateY += deltaY;
+            
+            lastMouseX = touches[0].clientX;
+            lastMouseY = touches[0].clientY;
+            
+            updateTransform();
+        } else if (touches.length === 2 && isTouchZooming) {
+            // Two-finger pinch zoom
+            const currentDistance = getTouchDistance(touches[0], touches[1]);
+            const distanceRatio = currentDistance / lastTouchDistance;
+            
+            const newScale = Math.max(Math.min(scale * distanceRatio, 5), 0.2);
+            
+            // Zoom towards the center of the two touches
+            const center = getTouchCenter(touches[0], touches[1]);
+            const rect = panZoomContainer?.getBoundingClientRect();
+            
+            if (rect) {
+                const touchCenterX = center.x - rect.left;
+                const touchCenterY = center.y - rect.top;
+                
+                translateX = touchCenterX - (touchCenterX - translateX) * (newScale / scale);
+                translateY = touchCenterY - (touchCenterY - translateY) * (newScale / scale);
+            }
+            
+            scale = newScale;
+            lastTouchDistance = currentDistance;
+            updateTransform();
+        }
+    }
+    
+    function handleTouchEnd(event: TouchEvent) {
+        event.preventDefault();
+        touches = Array.from(event.touches);
+        
+        if (touches.length === 0) {
+            // All touches ended
+            isTouchPanning = false;
+            isTouchZooming = false;
+            
+            if (panZoomContainer) {
+                panZoomContainer.style.cursor = "grab";
+            }
+        } else if (touches.length === 1 && isTouchZooming) {
+            // Went from two touches to one - switch to panning
+            isTouchZooming = false;
+            isTouchPanning = true;
+            lastMouseX = touches[0].clientX;
+            lastMouseY = touches[0].clientY;
+        }
+    }
 </script>
 
 <div class="w-full min-h-[600px] sm:min-h-[700px] lg:min-h-[800px] mb-5">
@@ -202,15 +322,20 @@
         class="w-full min-h-[600px] sm:min-h-[700px] lg:min-h-[800px] max-h-[1000px] border-2 border-gray-300 
         rounded-lg bg-gray-50 relative overflow-hidden cursor-grab select-none focus:outline-2
         focus:outline-blue-500 focus:outline-offset-2"
+        style="touch-action: none;"
         on:mousedown={handleMouseDown}
         on:mousemove={handleMouseMove}
         on:mouseup={handleMouseUp}
         on:mouseleave={handleMouseUp}
         on:wheel={handleWheel}
         on:dblclick={handleDoubleClick}
+        on:touchstart={handleTouchStart}
+        on:touchmove={handleTouchMove}
+        on:touchend={handleTouchEnd}
+        on:touchcancel={handleTouchEnd}
         role="img"
         tabindex="0"
-        aria-label="Interactive diagram - use mouse to pan and zoom"
+        aria-label="Interactive diagram - use mouse to pan and zoom, or touch gestures on mobile"
     >
         <!-- Control Panel -->
         <div class="absolute top-2.5 right-2.5 z-50 flex gap-1 bg-white/95 p-2 rounded-md shadow-lg border border-black/10">
@@ -229,8 +354,9 @@
         </div>
 
         <!-- Help Text -->
-        <div class="absolute bottom-2.5 left-2.5 z-50 bg-black/80 text-white px-3 py-1.5 text-xs rounded font-medium">
-            Double-click to zoom • Mouse wheel to zoom • Click & drag to pan
+        <div class="absolute bottom-2.5 left-2.5 z-50 bg-black/80 text-white px-3 py-1.5 text-xs rounded font-medium max-w-xs">
+            <span class="hidden sm:inline">Double-click to zoom • Mouse wheel to zoom • Click & drag to pan</span>
+            <span class="sm:hidden">Pinch to zoom • Touch & drag to pan</span>
         </div>
 
         <!-- Mermaid Content -->
