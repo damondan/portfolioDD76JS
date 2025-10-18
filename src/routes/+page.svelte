@@ -78,8 +78,51 @@
 	<!-- Responsive React vs Svelte section -->
 	<div class="docsearch-comparison mt-2 sm:mt-4 lg:mt-6 text-center">
 		<h1 class="text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl font-medium text-gray-800">
-			React vs Svelte ...
+			SvelteKit vs React Next.js
 		</h1>
+	</div>
+
+	<!-- Description Area -->
+	<div class="description-area mt-2 w-full max-w-4xl mx-auto">
+		<h2 class="text-xl text-gray-800">
+			The pdfdocsearch app was created with React Next.js and SvelteKit. I chose SvelteKit for its far better memory efficiency and storage efficiency
+		</h2>
+	</div>
+
+	<!-- Comparison Table -->
+	<div class="comparison-table mt-8 w-full max-w-4xl mx-auto">
+		<table class="w-full border-collapse border border-gray-300 rounded-lg overflow-hidden shadow-lg">
+			<thead>
+				<tr class="bg-gray-100">
+					<th class="border border-gray-300 p-4 text-left"></th>
+					<th class="border border-gray-300 p-4 text-center text-red-600 font-bold text-lg">SvelteKit</th>
+					<th class="border border-gray-300 p-4 text-center text-blue-600 font-bold text-lg">React Next.js</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td class="border border-gray-300 p-4 font-bold text-black">Build Size</td>
+					<td class="border border-gray-300 p-4 text-center align-middle font-medium">11.3MB</td>
+					<td class="border border-gray-300 p-4 text-center align-middle font-medium">360MB</td>
+				</tr>
+				<tr>
+					<td class="border border-gray-300 p-4 font-bold text-black">Memory Footprint</td>
+					<td class="border border-gray-300 p-4 text-center align-middle font-medium">
+						Top 9.6MB<br/>HeapSize 6.58MB
+					</td>
+					<td class="border border-gray-300 p-4 text-center align-middle font-medium">
+						Top 20MB<br/>HeapSize 13.9MB
+					</td>
+				</tr>
+				<tr>
+					<td class="border border-gray-300 p-4 font-bold text-black">Developer Experience</td>
+					<td class="border border-gray-300 p-4 text-center align-middle">
+						<span class="text-green-500 text-4xl">✓</span>
+					</td>
+					<td class="border border-gray-300 p-4 text-center align-middle font-medium"></td>
+				</tr>
+			</tbody>
+		</table>
 	</div>
 </div>
 
