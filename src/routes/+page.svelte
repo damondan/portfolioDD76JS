@@ -85,7 +85,7 @@
 	<!-- Description Area -->
 	<div class="description-area mt-2 w-full max-w-4xl mx-auto">
 		<h2 class="text-xl text-gray-800">
-			The pdfdocsearch app was created with React Next.js and SvelteKit. I chose SvelteKit for its far better memory efficiency and storage efficiency
+			The pdfdocsearch app was created with React Next.js and SvelteKit. I chose SvelteKit for its far better memory and storage efficiency.
 		</h2>
 	</div>
 
