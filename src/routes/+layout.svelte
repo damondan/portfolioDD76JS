@@ -50,12 +50,12 @@
             SvelteKit-PdfDocSearch
         </a>
         <a
-            href={resolve('/nextproject')}
-            onclick={() => openTab('nextproject')}
+            href={resolve('/taurihub')}
+            onclick={() => openTab('taurihub')}
             class="border border-black text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl px-3 py-1 rounded transition-colors 
-                   {activeTab === 'nextproject' ? 'active text-green font-semibold' : 'hover:text-gray-600'}"
+                   {activeTab === 'taurihub' ? 'active text-green font-semibold' : 'hover:text-gray-600'}"
         >
-            Next Project
+            Tauri Hub
         </a>
     </div>
 </div>

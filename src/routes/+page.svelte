@@ -59,7 +59,7 @@
 	<!-- Responsive Architecture section -->
 	<div class="docsearch-arch mt-4 sm:mt-6 lg:mt-8 w-full">
 		<h1 class="text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl font-medium text-gray-800 text-center mb-6">
-			Architecture
+			Architecture Diagram
 		</h1>
 	</div>
 </div>
