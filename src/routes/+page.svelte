@@ -69,7 +69,6 @@
 	<p class="text-center">Portfolio Front End - (Hosted on Github Pages) SvelteKit, Typescript, CSS, TailwindCss</p>
 	<p class="text-center">PdfSearch App Front End - (Hosted on Railway) SvelteKit, Typescript, CSS, TailwindCss</p>
 	<p class="text-center">PdfSearch App Back End - (Hosted on Atlas MongoDb) - Pdf books</p>
-	<p class="text-center">AI Tools - ChatGpt, Warp AI</p>
 	<DiagramSection />
 </div>
 
